@@ -10,11 +10,13 @@ hugo server
 
 ## 发布
 
-GitHub Pages 需要发布 `main` 分支的 `/docs` 目录。
+GitHub Pages 现在发布的是 `main` 分支的仓库根目录。设置页里把文件夹改成 `/docs` 时，保存按钮可能没有反应。
 
-```bash
-hugo --minify --cleanDestinationDir
+```powershell
+./publish.ps1
 ```
+
+这会先构建到 `docs/`，再把页面同步到仓库根目录。`assets/css/extended/` 是样式源文件，同步时不会删掉。
 
 ## 新笔记
 
