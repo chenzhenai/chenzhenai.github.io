@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Danny Tech Notes</title>
+    <link>http://localhost:55874/</link>
+    <description>Recent content on Danny Tech Notes</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 02 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:55874/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CUDA Reduce Kernel</title>
+      <link>http://localhost:55874/posts/ruduce/</link>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:55874/posts/ruduce/</guid>
+      <description>&lt;h1 id=&#34;cuda-reduce-kernel&#34;&gt;CUDA Reduce Kernel&lt;/h1&gt;
+&lt;p&gt;Reduce 是 CUDA 编程中的经典并行归约问题。&lt;/p&gt;
+&lt;h2 id=&#34;问题定义&#34;&gt;问题定义&lt;/h2&gt;
+&lt;p&gt;给定：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
