@@ -1,0 +1,13 @@
+baseURL = "https://chenzhenai.github.io/"
+locale  = "zh-cn"
+
+title = "Danny Tech Notes"
+
+theme = "PaperMod"
+
+[params]
+author = "Danny Chen"
+
+ShowReadingTime = true
+ShowShareButtons = true
+ShowCodeCopyButtons = true
