@@ -1,0 +1,7 @@
+{{ define "main" }}
+{{- $mod := index (where hugo.Data.catalog.modules "id" .Params.module) 0 -}}
+<h1>{{ .Title }}</h1>
+{{- with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+{{- with .Content }}<div class="prose catalog-intro">{{ . }}</div>{{ end }}
+{{- with $mod }}{{ partial "series-flow.html" . }}{{ end }}
+{{ end }}

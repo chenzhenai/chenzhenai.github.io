@@ -1,13 +1,80 @@
 baseURL = "https://chenzhenai.github.io/"
-locale  = "zh-cn"
-
-title = "Danny Tech Notes"
-
+locale = "zh-cn"
+defaultContentLanguage = "zh"
+title = "chen.zhen"
+copyright = "© 2026 chen.zhen"
+publishDir = "docs"
 theme = "PaperMod"
+enableRobotsTXT = true
+
+[taxonomies]
+  tag = "tags"
 
 [params]
-author = "Danny Chen"
+  author = "chen.zhen"
+  description = "chen.zhen的公开笔记：从 0 到 1 AI Infra、从 0 到 1 Agent，和大模型论文研读。"
+  keywords = ["chen.zhen", "AI Infra", "CUDA", "推理系统", "AI Agent"]
+  defaultTheme = "auto"
+  DateFormat = "2006-01-02"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowCodeCopyButtons = true
+  ShowPostNavLinks = false
+  ShowRssButtonInSectionTermList = false
+  mainSections = ["posts"]
 
-ShowReadingTime = true
-ShowShareButtons = true
-ShowCodeCopyButtons = true
+  [params.label]
+    text = "chen.zhen"
+
+  [params.footer]
+    text = "[GitHub](https://github.com/chenzhenai) · [RSS](/index.xml)"
+
+  [params.assets]
+    favicon = "favicon.svg"
+    favicon16x16 = "favicon.svg"
+    favicon32x32 = "favicon.svg"
+    apple_touch_icon = "favicon.svg"
+    safari_pinned_tab = "favicon.svg"
+    theme_color = "#1c1915"
+    msapplication_TileColor = "#1c1915"
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/chenzhenai"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[[menu.main]]
+  name = "首页"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "从 0 到 1 AI Infra"
+  url = "/infra/"
+  weight = 2
+
+[[menu.main]]
+  name = "从 0 到 1 Agent"
+  url = "/agent/"
+  weight = 3
+
+[[menu.main]]
+  name = "大模型论文研读"
+  url = "/papers/"
+  weight = 4
+
+[[menu.main]]
+  name = "关于我"
+  url = "/about/"
+  weight = 5
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    unsafe = false

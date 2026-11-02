@@ -1,0 +1,34 @@
+{{- if not .steps }}
+<p class="empty-note">还没有笔记。</p>
+{{- else }}
+<div class="series-flow n{{ len .steps }}">
+    {{- range $i, $step := .steps }}
+    {{- if gt $i 0 }}
+    <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    {{- end }}
+    {{- $s := newScratch -}}
+    {{- $s.Set "n" 0 -}}
+    {{- range $step.lessons -}}
+        {{- with .path }}{{ $s.Add "n" 1 }}{{ end -}}
+    {{- end -}}
+    <section class="series-card tone-{{ $step.tone }}" id="{{ $step.id }}">
+        <p class="card-step">第 {{ $step.index }} 步 · {{ if eq ($s.Get "n") 0 }}还没开始{{ else if eq ($s.Get "n") (len $step.lessons) }}已完结 · {{ $s.Get "n" }} 篇{{ else }}连载中 · {{ $s.Get "n" }} 篇{{ end }}</p>
+        <h2>{{ $step.name }}</h2>
+        <p class="card-sub">{{ $step.summary }}</p>
+        <ol class="ep-list">
+            {{- range $j, $lesson := $step.lessons }}
+            <li>
+                {{- if $lesson.path }}
+                <a href="{{ if strings.Contains $lesson.path "#" }}{{ $lesson.path }}{{ else }}{{ $lesson.path | relLangURL }}{{ end }}"><span class="episode-number">{{ printf "%02d" (add $j 1) }}</span>{{ $lesson.title }}</a>
+                {{- else }}
+                <span class="pending"><span class="episode-number">{{ printf "%02d" (add $j 1) }}</span>{{ $lesson.title }}</span>
+                {{- end }}
+            </li>
+            {{- end }}
+        </ol>
+    </section>
+    {{- end }}
+</div>
+{{- end }}

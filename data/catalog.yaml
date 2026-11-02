@@ -1,0 +1,123 @@
+modules:
+  - id: infra
+    name: 从 0 到 1 AI Infra
+    path: /infra/
+    summary: 从 GPU 怎么执行计算，到训练、推理，再到模型本身。
+    noteLabel: 为什么从 Infra 走到 Agent
+    notePath: /posts/why-infra-first/
+    steps:
+      - id: gpu
+        index: "1"
+        name: 计算与 GPU
+        summary: 从向量加法写到 Tensor Core。
+        tone: blue
+        lessons:
+          - title: 教程总览
+            path: /infra/cuda/
+          - title: "执行模型：grid、block、warp"
+            path: "/infra/cuda/#s1"
+          - title: 内存层次与合并访问
+            path: "/infra/cuda/#s2"
+          - title: Roofline 与 Nsight
+            path: "/infra/cuda/#s2"
+          - title: 归约、Warp 与 Softmax
+            path: "/infra/cuda/#s3"
+          - title: CUDA 归约 kernel
+            path: /posts/cuda-reduce/
+          - title: SGEMM
+            path: "/infra/cuda/#s5"
+          - title: Tensor Core
+            path: "/infra/cuda/#s6"
+      - id: train
+        index: "2"
+        name: 训练系统
+        summary: 多卡在切什么、在传什么。
+        tone: green
+        lessons:
+          - title: 数据并行、张量并行、流水并行
+          - title: 集合通信出现在哪
+          - title: ZeRO 的显存和通信
+          - title: 混合精度与激活重计算
+      - id: infer
+        index: "3"
+        name: 推理系统
+        summary: 把延迟和显存从训练吞吐里拆出来。
+        tone: sand
+        lessons:
+          - title: GEMV 与量化
+            path: "/infra/cuda/#s9"
+          - title: FlashAttention（Prefill）
+            path: "/infra/cuda/#s10"
+          - title: Paged KV Cache
+            path: "/infra/cuda/#s11"
+          - title: Continuous batching
+          - title: CUDA Graph
+            path: "/infra/cuda/#s13"
+      - id: model
+        index: "4"
+        name: 模型与后训练
+        summary: 算子对应模型的哪一块，以及怎么按任务变。
+        tone: violet
+        lessons:
+          - title: Attention 的算力与访存
+            path: "/infra/cuda/#s10"
+          - title: GQA 与 Decode Attention
+            path: "/infra/cuda/#s11"
+          - title: "MoE：路由与 Grouped GEMM"
+            path: "/infra/cuda/#s12"
+          - title: SFT 与 DPO
+
+  - id: agent
+    name: 从 0 到 1 Agent
+    path: /agent/
+    summary: 把模型放进一个会失败的循环，并把轨迹记下来。
+    steps:
+      - id: tools
+        index: "1"
+        name: 工具与循环
+        summary: 一次调用怎么变成多步。
+        tone: teal
+        lessons:
+          - title: 教程总览
+            path: /agent/build/
+          - title: 一个最小循环
+            path: "/agent/build/#s1"
+          - title: 失败时发生什么
+            path: "/agent/build/#s2"
+          - title: 工具调用的协议
+            path: "/agent/build/#s8"
+      - id: memory
+        index: "2"
+        name: 记忆与规划
+        summary: 上下文里到底放了什么。
+        tone: blue
+        lessons:
+          - title: 上下文怎么组装
+            path: "/agent/build/#s3"
+          - title: 规划要不要拆步
+            path: "/agent/build/#s4"
+          - title: 压缩与隔离
+            path: "/agent/build/#s5"
+          - title: 记忆放在哪
+            path: "/agent/build/#s6"
+          - title: 知识库与 Agentic RAG
+            path: "/agent/build/#s7"
+      - id: eval
+        index: "3"
+        name: 评测与运行
+        summary: 成功、步数和成本。
+        tone: sand
+        lessons:
+          - title: 轨迹日志
+            path: "/agent/build/#s0"
+          - title: 成功率、步数、成本
+            path: "/agent/build/#s12"
+          - title: 可恢复的运行
+            path: "/agent/build/#s9"
+          - title: 持续进化
+            path: "/agent/build/#s13"
+
+  - id: papers
+    name: 大模型论文研读
+    path: /papers/
+    summary: 一篇论文一份笔记。只记问题、做法，和它落在系统的哪一层。

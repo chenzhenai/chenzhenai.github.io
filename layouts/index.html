@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>chen.zhen</h1>
+<p class="lede">从 0 到 1 记录 AI Infra 和 Agent。论文按篇另记。灰色标题是还没写的。</p>
+{{- range hugo.Data.catalog.modules }}
+<section class="track" id="{{ .id }}">
+    <header class="track-head">
+        <h2><a href="{{ .path | relLangURL }}">{{ .name }}</a></h2>
+        {{- $stat := partial "module-stat.html" . }}
+        <p class="track-status">{{ if eq $stat.n 0 }}还没开始{{ else if and (gt $stat.total 0) (eq $stat.n $stat.total) }}已完结 · {{ $stat.n }} 篇{{ else }}连载中 · {{ $stat.n }} 篇{{ end }}</p>
+        <p class="muted">{{ .summary }}</p>
+        {{- if .notePath }}
+        <p class="track-note"><a href="{{ .notePath | relLangURL }}">{{ .noteLabel }}</a></p>
+        {{- end }}
+    </header>
+    {{- partial "series-flow.html" . }}
+</section>
+{{- end }}
+{{ end }}

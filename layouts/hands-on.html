@@ -1,0 +1,52 @@
+{{ define "main" }}
+{{/* 正文来自页面参数 source 指向的仓库根目录 HTML。 */}}
+{{- $file := or .Params.source "cuda-kernel-hands-on.html" -}}
+{{- $backHref := or .Params.back "/infra/" -}}
+{{- $raw := readFile $file -}}
+{{- $style := index (split (index (split $raw "<style>") 1) "</style>") 0 -}}
+{{- $body := index (split (index (split $raw "<body>") 1) "<script>") 0 -}}
+{{- $script := index (split (index (split $raw "<script>") 1) "</script>") 0 -}}
+{{- $style = replace $style ":root{" "body.layout-hands-on{" -}}
+{{- $style = replace $style "@media (prefers-color-scheme: dark){" "html[data-theme=\"dark\"]{" -}}
+{{- $style = replace $style "a{color:" ".hands-root a{color:" -}}
+{{- $style = replace $style "a:hover{text-decoration:underline}" ".hands-root a:hover{text-decoration:underline}" -}}
+{{- $style = replace $style "pre code{" ".hands-root pre code{" -}}
+{{- $style = replace $style "pre .c{" ".hands-root pre .c{" -}}
+{{- $style = replace $style "pre .k{" ".hands-root pre .k{" -}}
+{{- $style = replace $style "pre{" ".hands-root pre{" -}}
+{{- $style = replace $style "code{font-family" ".hands-root code{font-family" -}}
+{{- $style = replace $style "table{" ".hands-root table{" -}}
+{{- $style = replace $style "th,td{" ".hands-root th,.hands-root td{" -}}
+{{- $style = replace $style "th{background" ".hands-root th{background" -}}
+{{- $style = replace $style "h2.section{" ".hands-root h2.section{" -}}
+{{- $style = replace $style "h3{" ".hands-root h3{" -}}
+{{- $style = replace $style "main{" ".hands-root .doc{" -}}
+{{- $style = replace $style "footer{" ".hands-root .hands-foot{" -}}
+{{- $style = replace $style "body{" "body.layout-hands-on{" -}}
+{{- $style = replace $style "scroll-padding-top:16px" "scroll-padding-top:64px" -}}
+{{- $body = replace $body "<main>" "<div class=\"doc\">" -}}
+{{- $body = replace $body "</main>" "</div>" -}}
+{{- $body = replace $body "<footer>" "<div class=\"hands-foot\">" -}}
+{{- $body = replace $body "</footer>" "</div>" -}}
+{{- $back := printf "<nav class=\"toc\" id=\"toc\"><p class=\"toc-back\"><a href=\"%s\">← 返回目录</a></p>" ($backHref | relLangURL) -}}
+{{- $body = replace $body "<nav class=\"toc\" id=\"toc\">" $back -}}
+<style>{{ $style | safeCSS }}</style>
+<style>
+  body.layout-hands-on .hands-root [id] { scroll-margin-top: 64px; }
+  body.layout-hands-on .hands-root .layout { min-height: calc(100vh - 48px); }
+  body.layout-hands-on .hands-root h1,
+  body.layout-hands-on .hands-root h2,
+  body.layout-hands-on .hands-root h3 { letter-spacing: 0; }
+  body.layout-hands-on .hands-root a:hover { color: var(--accent, var(--p1)); }
+  body.layout-hands-on .hands-root .doc { min-width: 0; }
+  body.layout-hands-on nav.toc li a { align-items: baseline; flex-wrap: wrap; }
+  body.layout-hands-on nav.toc .cnt { flex: none; white-space: nowrap; }
+  .toc-back { margin: 0 0 14px; font-size: 13px; }
+  body.layout-hands-on .hands-root .toc-back a,
+  body.layout-hands-on .hands-root .toc-back a:hover { color: var(--muted); text-decoration: none; }
+</style>
+<div class="hands-root">
+  {{ $body | safeHTML }}
+</div>
+<script>{{ $script | safeJS }}</script>
+{{ end }}

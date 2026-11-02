@@ -1,0 +1,9 @@
+{{- $id := . -}}
+{{- range $mod := hugo.Data.catalog.modules -}}
+    {{- range $mod.steps -}}
+        {{- if eq .id $id -}}
+            {{- return (dict "id" .id "name" .name "index" .index "href" (printf "%s#%s" ($mod.path | relLangURL) .id)) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return nil -}}
